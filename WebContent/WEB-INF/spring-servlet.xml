@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	
+	
+	<!-- 启用注解 -->
+	<mvc:annotation-driven/>
+	<!-- 设置使用注解的类所在的包    必须设置-->
+	<context:component-scan base-package="test1030"></context:component-scan>
+	
+	<!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀    必须设置 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/" p:suffix=".jsp" />
+	
+	
+	<!--  
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/test/*/*.do"/> 
+			<bean class="test1029.InterceptorTest"></bean>
+		</mvc:interceptor>
+		
+	</mvc:interceptors>-->
+	
+			<!-- 配置MultipartResolver，用于上传文件，使用spring的CommonsMultipartResolver -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   		 <property name="maxUploadSize" value="100000000"/>
+   		 <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+    <!-- 异常处理
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">error</prop>
+				
+			</props>
+		</property>
+	</bean> -->
+    
+    <bean class="test1030.CtrlException"></bean>
+	
+</beans>
